@@ -1,10 +1,11 @@
 "use client";
 import { useState } from "react";
-import OrderBook from "../order-book";
 import { useStore } from "@/app/lib/store";
+import { formatPrice } from "@/app/lib/format";
 
 export default function OrderForm() {
   const { currentPrice, currentType, order, changeType } = useStore();
+  const [focus, setFocus] = useState<"total" | "unit">("total");
 
   const [total, setTotal] = useState(0);
   const [unit, setUnit] = useState(0);
@@ -68,13 +69,20 @@ export default function OrderForm() {
           <div className="column pt-4">
             <label htmlFor="">Total</label>
 
-            <input
-              type="text"
-              className="w-full mt-2 p-2"
-              placeholder="In IDR"
-              onChange={handleTotal}
-              value={total}
-            />
+            {focus === "unit" ? (
+              <p>{formatPrice(total)}</p>
+            ) : (
+              <input
+                type="number"
+                min={0.01}
+                step={0.01}
+                className="w-full mt-2 p-2"
+                placeholder="In IDR"
+                onChange={handleTotal}
+                value={total}
+                onFocus={() => setFocus("total")}
+              />
+            )}
           </div>
 
           <div className="column pt-4">
@@ -86,6 +94,8 @@ export default function OrderForm() {
               placeholder="BTC"
               onChange={handleUnit}
               value={unit}
+              onFocus={() => setFocus("unit")}
+              onBlur={() => setFocus("total")}
             />
           </div>
 
@@ -99,8 +109,6 @@ export default function OrderForm() {
           </div>
         </div>
       </div>
-
-      <OrderBook />
     </div>
   );
 }

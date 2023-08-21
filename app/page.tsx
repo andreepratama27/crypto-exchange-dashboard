@@ -1,5 +1,7 @@
+"use client";
 import ChartWrapper from "./_components/chart-wrapper";
 import Navbar from "./_components/navbar";
+import OrderBook from "./_components/order-book";
 import OrderForm from "./_components/order-form";
 
 export default function Home() {
@@ -12,6 +14,8 @@ export default function Home() {
 
           <OrderForm />
         </div>
+
+        <OrderBook />
       </main>
     </>
   );

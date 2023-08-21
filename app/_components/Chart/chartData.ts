@@ -1,3 +1,4 @@
+import { useStore } from "@/app/lib/store";
 import { useEffect, useRef, useState } from "react";
 
 interface SimulateDataProps {
@@ -7,20 +8,9 @@ interface SimulateDataProps {
   delay: number;
 }
 
-const initialData = [
-  {
-    x: new Date(Date.now()),
-    y: [
-      +Math.round(Math.random() * 10000).toFixed(2),
-      +Math.round(Math.random() * 10000).toFixed(2),
-      +Math.round(Math.random() * 10000).toFixed(2),
-      +Math.round(Math.random() * 10000).toFixed(2),
-    ],
-  },
-];
-
 export const useSimulateData = ({ delay }: SimulateDataProps) => {
-  const [data, setData] = useState<any[]>(initialData);
+  const { currentPrice } = useStore();
+  const [data, setData] = useState<any[]>([]);
 
   const timeout = useRef<any>(null);
 
@@ -31,10 +21,10 @@ export const useSimulateData = ({ delay }: SimulateDataProps) => {
         {
           x: new Date(Date.now()),
           y: [
-            +Math.round(Math.random() * 10000).toFixed(2),
-            +Math.round(Math.random() * 10000).toFixed(2),
-            +Math.round(Math.random() * 10000).toFixed(2),
-            +Math.round(Math.random() * 10000).toFixed(2),
+            Math.round(currentPrice + Math.random() * 1000), // Open Price
+            Math.round(currentPrice + Math.random() * 1000), // High Price
+            Math.round(currentPrice + Math.random() * 1000), // Low Price
+            Math.round(currentPrice + Math.random() * 1000), // Close Price
           ],
         },
       ]);

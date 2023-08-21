@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { API_URL } from "./api";
 
 enum OrderType {
   buy = "buy",
@@ -17,12 +18,21 @@ interface StoreInterface {
   orderList: Order[];
   changeType: ({ type }: { type: keyof typeof OrderType }) => void;
   order: ({ payload }: { payload: Order }) => void;
+  fetch: () => Promise<any>;
 }
 
 export const useStore = create<StoreInterface>((set) => ({
-  currentPrice: 4000000,
+  currentPrice: 0,
   currentType: OrderType.buy,
   orderList: [],
+  fetch: async () => {
+    const response = await fetch("/api");
+    const result = await response.json();
+
+    set({
+      currentPrice: result.data,
+    });
+  },
   changeType: ({ type }: { type: keyof typeof OrderType }) =>
     set(() => ({
       currentType: type,

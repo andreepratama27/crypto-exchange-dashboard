@@ -2,9 +2,15 @@
 import { useStore } from "@/app/lib/store";
 import Chart from "../Chart";
 import { formatPrice } from "@/app/lib/format";
+import { useEffect } from "react";
+import OrderBook from "../order-book";
 
 export default function ChartWrapper() {
-  const { currentPrice } = useStore();
+  const { currentPrice, fetch } = useStore();
+
+  useEffect(() => {
+    fetch();
+  }, []);
 
   return (
     <div className="w-full bg-gray-100 p-4 rounded mb-4">
