@@ -27,3 +27,11 @@ Since you want to run this project locally, you also need to clone the `websocke
 - Install the package with `npm install`, `yarn install` or `pnpm install`
 - Run the Project with command `npm run dev`, `yarn dev` or `pnpm run dev` depends on your package manager
 - The websocket can be accessed on ws:\\localhost:3001
+
+### Things to Improve
+
+- Design
+Need to make it more tidy and responsive. Currently, it just show the candlestick chart with orderbook form and table
+
+- Caching
+Currently the ticker is just a function with setInterval in it. So, need a mechanism to fix how the app call the API with websocket.
