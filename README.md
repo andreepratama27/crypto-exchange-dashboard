@@ -12,7 +12,7 @@ I Choose Tailwind for rapid styling with css
 
 ### How to use this project
 
-Access the web at: 
+Access the web at: https://crypto-exchange-dashboard.vercel.app/
 
 If you want to run this project locally:
 - Clone this Frontend project
