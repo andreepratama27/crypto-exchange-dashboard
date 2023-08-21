@@ -3,7 +3,6 @@ import { useStore } from "@/app/lib/store";
 import Chart from "../Chart";
 import { formatPrice } from "@/app/lib/format";
 import { useEffect } from "react";
-import OrderBook from "../order-book";
 
 export default function ChartWrapper() {
   const { currentPrice, fetch } = useStore();

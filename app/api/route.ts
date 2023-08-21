@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import { API_URL } from "../lib/api";
+import { ApiUrl } from "../lib/constant";
 
 export async function GET() {
-  const response = await fetch(API_URL);
+  const response = await fetch(ApiUrl as string);
   const result = await response.json();
 
   return NextResponse.json({
