@@ -1,3 +1,4 @@
+"use client";
 import { formatPrice } from "@/app/lib/format";
 import { useStore } from "@/app/lib/store";
 

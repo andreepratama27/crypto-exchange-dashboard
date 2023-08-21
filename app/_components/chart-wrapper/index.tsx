@@ -18,7 +18,7 @@ export default function ChartWrapper() {
       </p>
 
       <div className="candlestick w-full border-blue-500">
-        <Chart />
+        {typeof window !== "undefined" && <Chart />}
       </div>
     </div>
   );

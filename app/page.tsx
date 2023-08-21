@@ -1,4 +1,3 @@
-"use client";
 import ChartWrapper from "./_components/chart-wrapper";
 import Navbar from "./_components/navbar";
 import OrderBook from "./_components/order-book";
