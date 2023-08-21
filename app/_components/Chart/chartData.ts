@@ -7,22 +7,43 @@ interface SimulateDataProps {
   delay: number;
 }
 
-export const useSimulateData = ({ delay }: { delay: number }) => {
-  const [data, setData] = useState<number[]>([]);
-  const [counter, setCounter] = useState(1);
+const initialData = [
+  {
+    x: new Date(Date.now()),
+    y: [
+      +Math.round(Math.random() * 10000).toFixed(2),
+      +Math.round(Math.random() * 10000).toFixed(2),
+      +Math.round(Math.random() * 10000).toFixed(2),
+      +Math.round(Math.random() * 10000).toFixed(2),
+    ],
+  },
+];
+
+export const useSimulateData = ({ delay }: SimulateDataProps) => {
+  const [data, setData] = useState<any[]>(initialData);
 
   const timeout = useRef<any>(null);
 
   useEffect(() => {
     timeout.current = setInterval(() => {
-      setCounter((prevState) => prevState + 1);
-      setData((prevState) => [...prevState, counter]);
+      setData((prevState) => [
+        ...prevState,
+        {
+          x: new Date(Date.now()),
+          y: [
+            +Math.round(Math.random() * 10000).toFixed(2),
+            +Math.round(Math.random() * 10000).toFixed(2),
+            +Math.round(Math.random() * 10000).toFixed(2),
+            +Math.round(Math.random() * 10000).toFixed(2),
+          ],
+        },
+      ]);
     }, delay * 1000);
 
     return () => {
       clearInterval(timeout.current);
     };
-  }, [counter, delay]);
+  }, [delay]);
 
   return { data };
 };
@@ -277,7 +298,18 @@ export const chartData = {
   options: {
     chart: {
       type: "candlestick",
-      height: 350,
+      height: 450,
+      toolbar: {
+        show: true,
+        tools: {
+          zoom: false,
+          zoomin: true,
+          zoomout: true,
+          pan: true,
+          reset: false,
+          download: false,
+        },
+      },
     },
     title: {
       text: "CandleStick Chart",
